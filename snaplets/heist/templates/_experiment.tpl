@@ -35,6 +35,11 @@
         var color = document.getElementById('canv').getAttribute('data-color');
         var shape = document.getElementById('canv').getAttribute('data-shape');
 
+        document.getElementById('enlarge').onmousedown = function() { what = increase };
+        document.getElementById('shrink').onmousedown  = function() { what = decrease };
+        document.getElementById('enlarge').onmouseup = function() { what = null };
+        document.getElementById('shrink').onmouseup  = function() { what = null };
+
         initialSize = size;
         
         draw(context, color, shape, size, size);
@@ -93,7 +98,7 @@
   <input type="hidden" name="initialSize" value=${iniSz}>
   <input type="hidden" name="color" value=${color}>
   <input type="hidden" name="ratio" value=${ratio}>
-  <input type="hidden" name="shape" value=${shape}>
+  <input type="hidden" name="ratio" value=${ratio}>
   <input type="hidden" id="userSize" name="userSize">
   <p class="text-center"><button type="submit" class="btn">Done!</button></p>
 </form>
@@ -102,4 +107,7 @@
   <canvas id="canv" width="800" height="600" data-initial=${iniSz} data-color=${color} data-shape=${shape}></canvas>
 </div>
 
-
+<div class="row">
+  <div class="span5"><p class="text-center"><button id="enlarge" class="btn btn-large">Enlarge</button></p></div>
+  <div class="span5 offset2"><p class="text-center"><button id="shrink" class="btn btn-large">Shrink</button></p></div>
+</div>
