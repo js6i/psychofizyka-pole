@@ -1,4 +1,4 @@
-<h1>Snap Example App Login</h1>
+<h2>Login</h2>
 
 <p><loginError/></p>
 

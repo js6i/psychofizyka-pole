@@ -127,11 +127,22 @@ handleEndExperiment = do
               let capitalize (x:xs) = toUpper x : xs
                   capitalize x = map toUpper x
 
-              return $ Record { _shape   = read . B.unpack . head $ shape
-                              , _color   = read . capitalize . B.unpack . head $ color
-                              , _ratio   = read . B.unpack . head $  ratio
-                              , _initial = read . B.unpack . head $  iniSz
-                              , _result  = read . B.unpack . head $ userSz
+                  readMaybe :: (Read a) => String -> Maybe a
+                  readMaybe s = case reads s of
+                                [(x, "")] -> Just x
+                                _ -> Nothing
+
+              shapeP <- readMaybe . B.unpack . head $ shape
+              colorP <- readMaybe . capitalize . B.unpack . head $ color
+              ratioP <- readMaybe . B.unpack . head $ ratio
+              initiP <- readMaybe . B.unpack . head $ iniSz
+              resulP <- readMaybe . B.unpack . head $ userSz
+
+              return $ Record { _shape   = shapeP
+                              , _color   = colorP
+                              , _ratio   = ratioP
+                              , _initial = initiP
+                              , _result  = resulP
                               }
   uid <- fmap (userLogin . fromJust) currentUser
 
