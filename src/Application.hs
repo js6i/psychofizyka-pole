@@ -16,6 +16,8 @@ import Data.ByteString
 import Data.SafeCopy
 import Data.Typeable
 import Data.Int
+import Data.Char
+import Data.Aeson
 
 import qualified Data.Text as T
 import qualified Data.Map as M
@@ -26,6 +28,15 @@ import Snap.Snaplet.Heist
 import Snap.Snaplet.Auth
 import Snap.Snaplet.Session
 import Snap.Snaplet.AcidState
+
+------------------------------------------------------------------------------
+readMaybe :: (Read a) => String -> Maybe a
+readMaybe s = case reads s of
+                [(x, "")] -> Just x
+                _ -> Nothing
+
+capitalize (x:xs) = toUpper x : xs
+capitalize x = Prelude.map toUpper x
 
 ------------------------------------------------------------------------------
 type Pixels = Int
@@ -85,6 +96,21 @@ getRecords :: Query PersistentState Records
 getRecords = asks _records
 
 makeAcidic ''PersistentState ['addUser, 'getRecords, 'getRecord, 'addRecord]
+
+------------------------------------------------------------------------------
+instance ToJSON Shape where
+  toJSON = toJSON . show
+
+instance ToJSON FillColor where
+  toJSON = toJSON . fmap toLower . show
+
+instance ToJSON Record where
+  toJSON r = toJSON . M.fromList $ [ ("shape",   toJSON $ _shape   r)
+                                   , ("color",   toJSON $ _color   r)
+                                   , ("ratio",   toJSON $ _ratio   r)
+                                   , ("initial", toJSON $ _initial r)
+                                   , ("result",  toJSON $ _result  r)
+                                   ]
 
 ------------------------------------------------------------------------------
 data App = App

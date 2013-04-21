@@ -24,6 +24,7 @@ Executable psychofizyka-pole
 
   Build-depends:
     snaplet-acid-state,
+    snap-extras,
     bytestring                >= 0.9.1   && < 0.11,
     heist                     >= 0.11    && < 0.12,
     MonadCatchIO-transformers >= 0.2.1   && < 0.4,
@@ -35,6 +36,7 @@ Executable psychofizyka-pole
     text                      >= 0.11    && < 0.12,
     time                      >= 1.1     && < 1.5,
     xmlhtml                   >= 0.1,
+    aeson,
     random,
     transformers,
     safecopy,

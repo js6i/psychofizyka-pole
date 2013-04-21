@@ -14,14 +14,16 @@ import           Control.Applicative
 import           Control.Monad
 import           Control.Monad.IO.Class
 import           Control.Monad.Trans.Maybe
+import           Data.Aeson
 import           Data.ByteString (ByteString)
 import           Data.Maybe
-import           Data.Int
 import           Data.Char
+import           Data.Int
 import qualified Data.Text as T
 import qualified Data.ByteString.Char8 as B
 import qualified Data.Map as M
 import           Snap.Core
+import           Snap.Extras.JSON
 import           Snap.Snaplet
 import           Snap.Snaplet.Auth
 import           Snap.Snaplet.Auth.Backends.JsonFile
@@ -124,14 +126,6 @@ handleEndExperiment = do
               userSz <- M.lookup "userSize" vals
               shape  <- M.lookup "shape" vals
 
-              let capitalize (x:xs) = toUpper x : xs
-                  capitalize x = map toUpper x
-
-                  readMaybe :: (Read a) => String -> Maybe a
-                  readMaybe s = case reads s of
-                                [(x, "")] -> Just x
-                                _ -> Nothing
-
               shapeP <- readMaybe . B.unpack . head $ shape
               colorP <- readMaybe . capitalize . B.unpack . head $ color
               ratioP <- readMaybe . B.unpack . head $ ratio
@@ -155,12 +149,7 @@ handleEndExperiment = do
 -- | Show all results.
 
 handleResults :: Handler App App ()
-handleResults = do
-  results <- query GetRecords
-
-  let tst = I.bindSplices [("records", return [X.TextNode . T.pack . show $ results])]
-
-  heistLocal tst $ render "results"
+handleResults = query GetRecords >>= writeJSON
 
 ------------------------------------------------------------------------------
 -- | The application initializer.
