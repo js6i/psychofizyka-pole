@@ -40,7 +40,7 @@ instance Random Shape where
                       (fromEnum a, fromEnum b) g
   random g        = randomR (minBound, maxBound) g
 
-data FillColor = Red | Green | Blue | White | Black
+data FillColor = Red | Green | Blue | White | Black | Yellow | Cyan | Magenta
   deriving (Show, Eq, Ord, Typeable, Enum, Bounded, Read)
 
 deriveSafeCopy 0 'base ''FillColor
