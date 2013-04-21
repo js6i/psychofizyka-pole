@@ -106,6 +106,7 @@ handleNewExperiment = do
               [ ("ratio", return [X.TextNode . T.pack . show $ ratio])
               , ("iniSz", return [X.TextNode . T.pack . show $ iniSz])
               , ("color", return [X.TextNode . col2RGB $ flcol])
+              , ("shape", return [X.TextNode . T.pack . show $ shape])
               ]
 
   heistLocal tst $ render "experiment"
@@ -121,11 +122,12 @@ handleEndExperiment = do
               ratio  <- M.lookup "ratio" vals
               iniSz  <- M.lookup "initialSize" vals
               userSz <- M.lookup "userSize" vals
+              shape  <- M.lookup "shape" vals
 
               let capitalize (x:xs) = toUpper x : xs
                   capitalize x = map toUpper x
 
-              return $ Record { _shape   = Square
+              return $ Record { _shape   = read . B.unpack . head $ shape
                               , _color   = read . capitalize . B.unpack . head $ color
                               , _ratio   = read . B.unpack . head $  ratio
                               , _initial = read . B.unpack . head $  iniSz

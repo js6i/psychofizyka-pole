@@ -33,14 +33,27 @@
         var context = canvas.get(0).getContext('2d');
         var size = parseInt(document.getElementById('canv').getAttribute('data-initial'));
         var color = document.getElementById('canv').getAttribute('data-color');
+        var shape = document.getElementById('canv').getAttribute('data-shape');
 
         initialSize = size;
         
-        draw(context, color, size, size);
+        draw(context, color, shape, size, size);
     });
+
+    function drawShape(context, color, shape, x, y, size) {
+        if (shape == "Circle") {
+            context.beginPath();
+            context.arc(x, y, size/2, 0, 2 * Math.PI, false);
+        } else if (shape == "Square") {
+            context.rect(x-size/2, y-size/2, size, size);
+        } else alert("shape error");
+        context.fillStyle = color;
+        context.fill();
+        context.stroke();
+        context.closePath();
+    }
     
-    function draw(context, color, size1, size2) 
-    {
+    function draw(context, color, shape, size1, size2) {
         context.beginPath();
 
         context.clearRect(0, 0, 800, 600);
@@ -48,17 +61,8 @@
         context.strokeStyle = 'black';
         context.fillRect(0, 0, 800, 600);
 
-        context.rect(200-size1/2, 300-size1/2, size1, size1);
-        context.fillStyle = color;
-        context.fill();
-        context.stroke();
-        context.closePath();
-
-        context.rect(600-size2/2, 300-size2/2, size2, size2);
-        context.fillStyle = color;
-        context.fill();
-        context.stroke();
-        context.closePath();
+        drawShape(context, color, shape, 200, 300, size1);
+        drawShape(context, color, shape, 600, 300, size2);
 
         var change;
 
@@ -73,7 +77,7 @@
 
         document.getElementById('userSize').value = userSize;
 
-        setTimeout(function(){ draw(context, color, size1, userSize) }, 10);
+        setTimeout(function(){ draw(context, color, shape, size1, userSize) }, 10);
     }   
 </script>
 
@@ -89,12 +93,13 @@
   <input type="hidden" name="initialSize" value=${iniSz}>
   <input type="hidden" name="color" value=${color}>
   <input type="hidden" name="ratio" value=${ratio}>
+  <input type="hidden" name="shape" value=${shape}>
   <input type="hidden" id="userSize" name="userSize">
   <p class="text-center"><button type="submit" class="btn">Done!</button></p>
 </form>
 
 <div style="margin: 0 auto; width: 800px;">
-  <canvas id="canv" width="800" height="600" data-initial=${iniSz} data-color=${color}></canvas>
+  <canvas id="canv" width="800" height="600" data-initial=${iniSz} data-color=${color} data-shape=${shape}></canvas>
 </div>
 
 
