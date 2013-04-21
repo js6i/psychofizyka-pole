@@ -98,7 +98,7 @@
   <input type="hidden" name="initialSize" value=${iniSz}>
   <input type="hidden" name="color" value=${color}>
   <input type="hidden" name="ratio" value=${ratio}>
-  <input type="hidden" name="ratio" value=${ratio}>
+  <input type="hidden" name="shape" value=${shape}>
   <input type="hidden" id="userSize" name="userSize">
   <p class="text-center"><button type="submit" class="btn">Done!</button></p>
 </form>
