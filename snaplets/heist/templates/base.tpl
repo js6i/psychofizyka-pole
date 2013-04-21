@@ -1,11 +1,11 @@
 <html>
   <head>
-    <title>Psycho-scaling</title>
+    <title>Psycho-skalowanie</title>
     <link rel="stylesheet" type="text/css" href="/bootstrap.css"/>
   </head>
   <body>
     <div class="container">
-      <h1> Experiment </h1>
+      <h1> Eksperyment - psychofizyka </h1>
 
       <apply-content/>
 

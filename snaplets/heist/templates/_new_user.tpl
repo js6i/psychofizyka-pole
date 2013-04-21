@@ -1,9 +1,9 @@
-<h2>Register a new user</h2>
+<h2>Rejestracja nowego użytkownika</h2>
 
 <ul class="nav nav-pills">
-  <li><a href="/">Home</a></li>
+  <li><a href="/">Powrót</a></li>
 </ul>
 
 <bind tag="postAction">/new_user</bind>
-<bind tag="submitText">Add User</bind>
+<bind tag="submitText">Zarejestruj</bind>
 <apply template="userform"/>

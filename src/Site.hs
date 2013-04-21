@@ -98,7 +98,7 @@ handleNewExperiment = do
   shape <- liftIO (randomIO :: IO Shape)
   flcol <- liftIO (randomIO :: IO FillColor)
   ratio <- liftIO (randomRIO (2,   10) :: IO Pixels)
-  iniSz <- liftIO (randomRIO (20, 100) :: IO Pixels)
+  iniSz <- liftIO (randomRIO (50, 100) :: IO Pixels)
 
   let col2RGB = T.pack . map toLower . show
 

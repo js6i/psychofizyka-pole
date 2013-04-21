@@ -77,7 +77,7 @@
 
         userSize = size2 + change;
 
-        if (userSize <   1) userSize = 1;
+        if (userSize < size1) userSize = size1;
         if (userSize > 400) userSize = 400;
 
         document.getElementById('userSize').value = userSize;
@@ -87,12 +87,14 @@
 </script>
 
 <ul class="nav nav-pills">
-  <li><a href="/experiment">Skip</a></li>
-  <li><a href="/">Finish</a></li>
-  <li><a href="/logout">Logout</a></li>
+  <li><a href="/experiment">Pomiń</a></li>
+  <li><a href="/">Zakończ</a></li>
+  <li><a href="/logout">Wyloguj</a></li>
 </ul>
 
-<p class="text-center">user: <loggedInUser/>, target ratio: <b><ratio/></b></p>
+<p class="text-center">użytkownik: <loggedInUser/>, docelowy stosunek pól: <b><ratio/></b></p>
+
+<p class="text-center">sterowanie klawiaturą: &uarr; - powiększ, &darr; - pomniejsz</p>
 
 <form method="post" action="/experiment">
   <input type="hidden" name="initialSize" value=${iniSz}>
@@ -100,7 +102,7 @@
   <input type="hidden" name="ratio" value=${ratio}>
   <input type="hidden" name="shape" value=${shape}>
   <input type="hidden" id="userSize" name="userSize">
-  <p class="text-center"><button type="submit" class="btn">Done!</button></p>
+  <p class="text-center"><button type="submit" class="btn">Gotowe!</button></p>
 </form>
 
 <div style="margin: 0 auto; width: 800px;">
@@ -108,6 +110,6 @@
 </div>
 
 <div class="row">
-  <div class="span5"><p class="text-center"><button id="enlarge" class="btn btn-large">Enlarge</button></p></div>
-  <div class="span5 offset2"><p class="text-center"><button id="shrink" class="btn btn-large">Shrink</button></p></div>
+  <div class="span5"><p class="text-center"><button id="enlarge" class="btn btn-large">Powiększ</button></p></div>
+  <div class="span5 offset2"><p class="text-center"><button id="shrink" class="btn btn-large">Pomniejsz</button></p></div>
 </div>

@@ -1,9 +1,9 @@
-<h2>Login</h2>
+<h2>Zaloguj</h2>
 
 <p><loginError/></p>
 
 <bind tag="postAction">/login</bind>
-<bind tag="submitText">Login</bind>
+<bind tag="submitText">Zaloguj</bind>
 <apply template="userform"/>
 
-<p>Don't have a login yet? <a href="/new_user">Create a new user</a></p>
+<p><a href="/new_user">Rejestracja nowego użytkownika</a></p>
