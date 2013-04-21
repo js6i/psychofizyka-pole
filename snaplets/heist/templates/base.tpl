@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Snap web server</title>
+    <title>Psycho-scaling</title>
     <link rel="stylesheet" type="text/css" href="/bootstrap.css"/>
   </head>
   <body>
