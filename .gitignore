@@ -1,0 +1,8 @@
+dist/
+cabal-dev/
+log/
+state/
+users.json
+site_key.txt
+.*swp
+.ghci
