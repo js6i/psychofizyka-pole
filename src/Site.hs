@@ -138,11 +138,12 @@ handleEndExperiment = do
                               , _initial = initiP
                               , _result  = resulP
                               }
-  uid <- fmap (userLogin . fromJust) currentUser
 
-  case record of
-    Nothing -> redirect "/"
-    Just r  -> update (AddRecord uid r) >> redirect "/experiment"
+  uid <- currentUser
+
+  case (record, fmap userLogin uid) of
+    (Just r, Just u)  -> update (AddRecord u r) >> redirect "/experiment"
+    _                 -> redirect "/"
 
 
 ------------------------------------------------------------------------------
