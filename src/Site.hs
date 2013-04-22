@@ -120,24 +120,19 @@ handleEndExperiment = do
   vals <- getPostParams
   
   let record = do
-              color  <- M.lookup "color" vals
-              ratio  <- M.lookup "ratio" vals
-              iniSz  <- M.lookup "initialSize" vals
-              userSz <- M.lookup "userSize" vals
-              shape  <- M.lookup "shape" vals
+        shapeP <- readMaybe . B.unpack . head =<< M.lookup "shape" vals
+        colorP <- readMaybe . capitalize . B.unpack . head
+                                              =<< M.lookup "color" vals
+        ratioP <- readMaybe . B.unpack . head =<< M.lookup "ratio" vals
+        initiP <- readMaybe . B.unpack . head =<< M.lookup "initialSize" vals
+        resulP <- readMaybe . B.unpack . head =<< M.lookup "userSize" vals
 
-              shapeP <- readMaybe . B.unpack . head $ shape
-              colorP <- readMaybe . capitalize . B.unpack . head $ color
-              ratioP <- readMaybe . B.unpack . head $ ratio
-              initiP <- readMaybe . B.unpack . head $ iniSz
-              resulP <- readMaybe . B.unpack . head $ userSz
-
-              return $ Record { _shape   = shapeP
-                              , _color   = colorP
-                              , _ratio   = ratioP
-                              , _initial = initiP
-                              , _result  = resulP
-                              }
+        return $ Record { _shape   = shapeP
+                        , _color   = colorP
+                        , _ratio   = ratioP
+                        , _initial = initiP
+                        , _result  = resulP
+                        }
 
   uid <- currentUser
 
