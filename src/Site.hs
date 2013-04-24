@@ -72,7 +72,7 @@ handleNewUser = method GET handleForm <|> method POST handleFormSubmit
     handleFormSubmit = do
       result <- registerUser "login" "password"
       case result of
-        Left _   -> return () >> redirect "/"
+        Left _   -> redirect "/"
         Right au -> update (AddUser (userLogin au)) >> redirect "/"
 
 
